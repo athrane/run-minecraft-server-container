@@ -4,22 +4,20 @@
 # https://help.github.com/en/actions/configuring-and-managing-workflows/about-service-containers
 # https://help.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
 # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idservices
-#https://github.com/itzg/mc-monitor
+# https://github.com/itzg/mc-monitor
+# https://github.com/actions/example-services/blob/master/.github/workflows/redis-service.yml
 
 on: [push]
 
 jobs:
-  test-minecraft-mod-on-server:
+  test-mod-container-job:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     container: node:10.18-jessie
     services:
     
-      # Label used to access the service container
       mcserver:
-        image: itzg/minecraft-server:multiarch
-      
-        # Set environment variables
+        image: itzg/minecraft-server:multiarch      
         env:
           NAME: mc
           EULA: TRUE
@@ -27,13 +25,18 @@ jobs:
           TYPE: FORGE
           FORGEVERSION: 31.1.10
           MODS: https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
-
-        # Map port 25565 on the Docker host to port 25565 on the mc container
         ports:
           - 25565:25565
+        options: --name minecraftserver
 
     steps:
-      - name: Display the path
-        id: ls_path
-        run: ls -la
+      - name: Get Minecraft container health
+        id: mc_container_health
+        run: docker container inspect -f "{{.State.Health.Status}}" minecraftserver
         shell: bash
+        
+    steps:
+      - name: Display Minecraft container logs
+        id: mc_container_logs
+        run: docker logs minecraftserver
+        shell: bash        
