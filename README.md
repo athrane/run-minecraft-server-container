@@ -1,5 +1,6 @@
 # run-minecraft-server-container
-GitHub action to run minecraft server in container.
+
+Test repository for start Minecraft servers in containers.
 
 Source:
 https://help.github.com/en/actions/building-actions/creating-a-docker-container-action
