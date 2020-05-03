@@ -26,6 +26,7 @@ jobs:
           VERSION: 1.15.2
           TYPE: FORGE
           FORGEVERSION: 31.1.10
+          MODS=https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
 
         # Map port 25565 on the Docker host to port 25565 on the mc container
         ports:
