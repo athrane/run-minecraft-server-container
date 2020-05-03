@@ -38,4 +38,5 @@ jobs:
       - name: Display Minecraft container logs
         id: mc_container_logs
         run: user/bin/docker logs minecraftserver
-        shell: bash        
+        shell: bash       
+         
