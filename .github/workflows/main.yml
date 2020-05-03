@@ -1,6 +1,10 @@
 
 # Links: 
+# https://github.com/itzg/docker-minecraft-server
+# https://help.github.com/en/actions/configuring-and-managing-workflows/about-service-containers
 # https://help.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
+# https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idservices
+#https://github.com/itzg/mc-monitor
 
 on: [push]
 
@@ -13,7 +17,7 @@ jobs:
     
       # Label used to access the service container
       mcserver:
-        image: itzg/minecraft-server
+        image: itzg/minecraft-server:multiarch
       
         # Set environment variables
         env:
