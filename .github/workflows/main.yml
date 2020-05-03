@@ -24,6 +24,8 @@ jobs:
           NAME: mc
           EULA: TRUE
           VERSION: 1.15.2
+          TYPE: FORGE
+          FORGEVERSION: 31.1.10
 
         # Map port 25565 on the Docker host to port 25565 on the mc container
         ports:
