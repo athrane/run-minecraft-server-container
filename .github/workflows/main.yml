@@ -1,0 +1,42 @@
+
+# Links: 
+# https://help.github.com/en/actions/configuring-and-managing-workflows/creating-postgresql-service-containers
+
+on: [push]
+
+jobs:
+  test_minecraft-mod-job:
+    runs-on: ubuntu-latest
+  	timeout-minutes: 3
+  	container: node:10.18-jessie
+  	
+	services:
+
+      # Label used to access the service container
+      mcserver:
+
+        # Docker Hub image
+        image: itzg/minecraft-server
+
+        # Set environment variables
+        env:
+          NAME: mc
+          EULA: TRUE
+          
+          # Map port 25565 on the Docker host to port 25565 on the mc container
+          ports:
+          	- 25565:25565                      	
+          	
+    steps:
+
+    - name: Setup JDK 1.8
+      id: init_jdk
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+
+    - name: Display the path
+      id: ls_path
+      run: ls -la
+      shell: bash
+    
