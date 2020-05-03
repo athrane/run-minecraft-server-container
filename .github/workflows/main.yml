@@ -23,7 +23,7 @@ jobs:
         env:
           NAME: mc
           EULA: TRUE
-          VERSION=1.15.2
+          VERSION: 1.15.2
 
         # Map port 25565 on the Docker host to port 25565 on the mc container
         ports:
