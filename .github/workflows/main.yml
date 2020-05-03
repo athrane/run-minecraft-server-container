@@ -13,17 +13,16 @@ jobs:
     
       # Label used to access the service container
       mcserver:
-
-      # Docker Hub image
-      image: itzg/minecraft-server
+        image: itzg/minecraft-server
       
-      # Set environment variables
-      env:
-        NAME: mc
-        EULA: TRUE
-      # Map port 25565 on the Docker host to port 25565 on the mc container
-      ports:
-        - 25565:25565
+        # Set environment variables
+        env:
+          NAME: mc
+          EULA: TRUE
+
+        # Map port 25565 on the Docker host to port 25565 on the mc container
+        ports:
+          - 25565:25565
 
     steps:
       - name: Display the path
