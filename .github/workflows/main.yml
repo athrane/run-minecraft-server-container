@@ -9,7 +9,7 @@
 on: [push]
 
 jobs:
-  test_minecraft-mod-job:
+  test-minecraft-mod-on-server:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     container: node:10.18-jessie
@@ -23,6 +23,7 @@ jobs:
         env:
           NAME: mc
           EULA: TRUE
+          VERSION=1.15.2
 
         # Map port 25565 on the Docker host to port 25565 on the mc container
         ports:
