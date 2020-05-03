@@ -13,7 +13,6 @@ jobs:
   test-mod-container-job:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    container: node:10.18-jessie
     services:
     
       mcserver:
@@ -30,9 +29,21 @@ jobs:
         options: --name minecraftserver
 
     steps:
+      - name: Display the path
+        id: ls_path
+        run: ls -la
+        shell: bash
+
+      - name: Display the path
+        id: ls_path2
+        run: ls -la /usr/bin
+        shell: bash
+
       - name: Get Minecraft container health
-        run: docker container inspect -f "{{.State.Health.Status}}" minecraftserver
-        
+        id: mc_container_health
+        run: /usr/bin/docker container inspect -f "{{.State.Health.Status}}" minecraftserver
+
       - name: Display Minecraft container logs
-        run: docker logs minecraftserver
+        id: mc_container_logs
+        run: /usr/bin/docker logs minecraftserver
          
