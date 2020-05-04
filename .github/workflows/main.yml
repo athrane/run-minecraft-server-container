@@ -27,6 +27,11 @@ jobs:
         id: download_mod
         run: wget https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
 
+      - name: Display the mod directory
+        id: ls_mod_dir
+        run: ls -la /mods
+        shell: bash
+
   test_mod:
     name: Test mod in server 
     needs: download_mod
@@ -48,6 +53,11 @@ jobs:
         options: --name minecraftserver
 
     steps:
+      - name: Display the mod directory
+        id: ls_mod_dir
+        run: ls -la /mods
+        shell: bash
+    
       - name: Get Minecraft container health
         id: mc_container_health
         run: /usr/bin/docker container inspect -f "{{.State.Health.Status}}" minecraftserver
@@ -55,4 +65,4 @@ jobs:
       - name: Display Minecraft container logs
         id: mc_container_logs
         run: /usr/bin/docker logs minecraftserver
-         
+        
