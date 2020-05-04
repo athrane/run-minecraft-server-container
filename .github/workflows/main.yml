@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Create mods dir
         id: mkdir_data
-        run: mkdir .mods
+        run: mkdir ./mods
 
       - name: CD to mods dir
         id: cd_mods
