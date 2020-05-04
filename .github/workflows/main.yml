@@ -6,15 +6,33 @@
 # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idservices
 # https://github.com/itzg/mc-monitor
 # https://github.com/actions/example-services/blob/master/.github/workflows/redis-service.yml
+# https://stackoverflow.com/questions/57549439/how-do-i-use-docker-with-github-actions
 
 on: [push]
 
 jobs:
-  test-mod-container-job:
+  download_mod:
+    name: Download mod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create mods dir
+        id: mkdir_data
+        run: mkdir .mods
+
+      - name: CD to mods dir
+        id: cd_mods
+        run: cd ./mods
+
+      - name: Download mod
+        id: download_mod
+        run: curl https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
+
+  test_mod:
+    name: Test mod in server 
+    needs: download_mod
     runs-on: ubuntu-latest
     timeout-minutes: 5
     services:
-    
       mcserver:
         image: itzg/minecraft-server:multiarch      
         env:
@@ -23,21 +41,11 @@ jobs:
           VERSION: 1.15.2
           TYPE: FORGE
           FORGEVERSION: 31.1.10
-          MODS: https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
         ports:
           - 25565:25565
+        volumes:
+           - ./mods:/mods
         options: --name minecraftserver
-
-    steps:
-      - name: Display the path
-        id: ls_path
-        run: ls -la
-        shell: bash
-
-      - name: Display the path
-        id: ls_path2
-        run: ls -la /usr/bin
-        shell: bash
 
       - name: Get Minecraft container health
         id: mc_container_health
