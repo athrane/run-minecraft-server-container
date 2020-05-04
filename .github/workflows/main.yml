@@ -17,6 +17,11 @@ jobs:
     steps:
       - name: Display the path
         id: ls_path
+        run: pwd
+        shell: bash
+    
+      - name: Display current directory
+        id: ls_path
         run: ls -la
         shell: bash
 
