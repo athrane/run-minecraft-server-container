@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Display the path
-        id: ls_path
+        id: pwd_path
         run: pwd
         shell: bash
     
