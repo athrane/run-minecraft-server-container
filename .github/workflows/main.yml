@@ -25,7 +25,7 @@ jobs:
 
       - name: Download mod
         id: download_mod
-        run: curl -L https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
+        run: wget https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
 
   test_mod:
     name: Test mod in server 
@@ -44,7 +44,7 @@ jobs:
         ports:
           - 25565:25565
         volumes:
-           - ./mods:/mods
+           - /mods:/mods
         options: --name minecraftserver
 
     steps:
