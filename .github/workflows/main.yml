@@ -15,6 +15,11 @@ jobs:
     name: Download mod
     runs-on: ubuntu-latest
     steps:
+      - name: Display the path
+        id: ls_path
+        run: ls -la
+        shell: bash
+
       - name: Create mods dir
         id: mkdir_data
         run: mkdir /mods
