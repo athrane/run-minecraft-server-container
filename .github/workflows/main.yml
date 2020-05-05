@@ -27,19 +27,15 @@ jobs:
 
       - name: Create mods dir
         id: mkdir_data
-        run: mkdir /mods
-
-      - name: CD to mods dir
-        id: cd_mods
-        run: cd /mods
+        run: mkdir $GITHUB_WORKSPACE/mods
 
       - name: Download mod
         id: download_mod
-        run: wget https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
+        run: wget -P $GITHUB_WORKSPACE/mods https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
 
       - name: Display the mod directory
         id: ls_mod_dir
-        run: ls -la /mods
+        run: ls -la $GITHUB_WORKSPACE/mods
         shell: bash
 
   test_mod:
@@ -59,13 +55,13 @@ jobs:
         ports:
           - 25565:25565
         volumes:
-           - /mods:/mods
+           - $GITHUB_WORKSPACE/mods:/mods
         options: --name minecraftserver
 
     steps:
       - name: Display the mod directory
         id: ls_mod_dir
-        run: ls -la /mods
+        run: ls -la $GITHUB_WORKSPACE/mods
         shell: bash
     
       - name: Get Minecraft container health
