@@ -55,7 +55,7 @@ jobs:
         ports:
           - 25565:25565
         volumes:
-        options: --name minecraftserver -v -v ${{ github.workspace }}/mods:/mods
+        options: --name minecraftserver -v ${{ github.workspace }}/mods:/mods
 
     steps:
       - name: Display the mod directory
