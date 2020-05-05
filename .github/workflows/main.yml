@@ -55,7 +55,7 @@ jobs:
         ports:
           - 25565:25565
         volumes:
-           - ./mods:/mods
+           - $GITHUB_WORKSPACE:/mods
         options: --name minecraftserver
 
     steps:
