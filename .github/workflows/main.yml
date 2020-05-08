@@ -57,6 +57,10 @@ jobs:
         id: start_container
         run: docker-compose up -d
 
+      - name: List containers 
+        id: list_containers
+        run: docker ps -a
+
       - name: Get Minecraft container health
         id: mc_container_health
         run: /usr/bin/docker container inspect -f "{{.State.Health.Status}}" minecraftserver
