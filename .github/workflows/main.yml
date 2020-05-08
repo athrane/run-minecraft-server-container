@@ -38,8 +38,8 @@ jobs:
         run: ls -la $GITHUB_WORKSPACE/mods
         shell: bash
 
-      - name: Start container 
-        id: start container
+      - name: Run container 
+        id: run_mc_container
         run: |
           docker run -d -p 25565:25565 -e EULA=TRUE -e VERSION=1.15.2 -e TYPE=FORGE -e FORGEVERSION=31.1.10  --mount source=$GITHUB_WORKSPACE/mods,target=/mods --name minecraftserver itzg/minecraft-server:multiarch &
 
