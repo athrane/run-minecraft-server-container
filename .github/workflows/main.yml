@@ -38,6 +38,11 @@ jobs:
         run: ls -la $GITHUB_WORKSPACE/mods
         shell: bash
 
+      - name: Start container 
+        id: start container
+        run:  run: |
+          docker run -d -p 25565:25565 -e EULA=TRUE -e VERSION=1.15.2 -e TYPE=FORGE -e FORGEVERSION=31.1.10  --mount source=$GITHUB_WORKSPACE/mods,target=/mods --name minecraftserver itzg/minecraft-server:multiarch
+
   test_mod:
     name: Test mod in server 
     needs: download_mod
@@ -58,12 +63,7 @@ jobs:
            - mods:/mods
         options: --name minecraftserver
 
-    steps:
-      - name: Display the mod directory
-        id: ls_mod_dir
-        run: ls -la $GITHUB_WORKSPACE/mods
-        shell: bash
-    
+    steps:    
       - name: Get Minecraft container health
         id: mc_container_health
         run: /usr/bin/docker container inspect -f "{{.State.Health.Status}}" minecraftserver
@@ -71,4 +71,9 @@ jobs:
       - name: Display Minecraft container logs
         id: mc_container_logs
         run: /usr/bin/docker logs minecraftserver
-        
+
+      - name: Display the mod directory
+        id: ls_mod_dir
+        run: ls -la $GITHUB_WORKSPACE/mods
+        shell: bash
+
