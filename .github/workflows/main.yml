@@ -40,8 +40,8 @@ jobs:
 
       - name: Start container 
         id: start container
-        run:  run: |
-          docker run -d -p 25565:25565 -e EULA=TRUE -e VERSION=1.15.2 -e TYPE=FORGE -e FORGEVERSION=31.1.10  --mount source=$GITHUB_WORKSPACE/mods,target=/mods --name minecraftserver itzg/minecraft-server:multiarch
+        run: |
+          docker run -d -p 25565:25565 -e EULA=TRUE -e VERSION=1.15.2 -e TYPE=FORGE -e FORGEVERSION=31.1.10  --mount source=$GITHUB_WORKSPACE/mods,target=/mods --name minecraftserver itzg/minecraft-server:multiarch &
 
   test_mod:
     name: Test mod in server 
