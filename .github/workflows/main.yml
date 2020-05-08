@@ -8,6 +8,14 @@
 # https://github.com/actions/example-services/blob/master/.github/workflows/redis-service.yml
 # https://stackoverflow.com/questions/57549439/how-do-i-use-docker-with-github-actions
 
+# https://dev.to/s_abderemane/how-to-use-docker-services-in-github-actions-6ce
+# https://github.com/peter-evans/docker-compose-actions-workflow
+# https://github.community/t5/GitHub-Actions/Github-Actions-services-not-reachable/td-p/30050
+# https://docs.docker.com/engine/reference/commandline/create/#options
+# https://github.com/itzg/docker-minecraft-server/blob/master/examples/docker-compose-forge.yml
+# https://docs.docker.com/compose/compose-file/
+# https://ryaneschinger.com/blog/using-docker-native-health-checks/
+
 on: [push]
 
 jobs:
@@ -15,6 +23,11 @@ jobs:
     name: Download mod
     runs-on: ubuntu-latest
     steps:
+    
+      - name: Checkout
+        id: checkout_source
+        uses: actions/checkout@v2
+
       - name: Display the path
         id: pwd_path
         run: pwd
@@ -38,10 +51,9 @@ jobs:
         run: ls -la $GITHUB_WORKSPACE/mods
         shell: bash
 
-      - name: Run container 
-        id: run_mc_container
-        run: |
-          docker run -d -p 25565:25565 -e EULA=TRUE -e VERSION=1.15.2 -e TYPE=FORGE -e FORGEVERSION=31.1.10  -v "/home/runner/work/run-minecraft-server-container/run-minecraft-server-container/mods":"/mods" --name minecraftserver itzg/minecraft-server:multiarch
+      - name: Start container 
+        id: start_container
+        run: docker-compose up -d
 
       - name: Get Minecraft container health
         id: mc_container_health

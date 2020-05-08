@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  minecraft:
+    image: itzg/minecraft-server
+    ports:
+    # expose the Minecraft server port outside of container
+    - 25565:25565
+    environment:
+      NAME: mc
+      EULA: "TRUE"
+      TYPE: FORGE
+      VERSION: 1.15.2
+      FORGEVERSION: 31.1.10
+    volumes:
+      # attach local host directory "mods" in same directory as this compose file
+      # all mods in this directory get copied into /data/mods at startup
+      - ./mods:/mods:ro
