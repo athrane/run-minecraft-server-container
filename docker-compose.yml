@@ -16,3 +16,10 @@ services:
       # attach local host directory "mods" in same directory as this compose file
       # all mods in this directory get copied into /data/mods at startup
       - ./mods:/mods:ro
+      
+    healthcheck:
+      test: mc-monitor status --host localhost --port 25565
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
