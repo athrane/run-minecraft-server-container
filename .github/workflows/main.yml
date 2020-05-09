@@ -38,7 +38,7 @@ jobs:
 
       - name: Show processes and ports
         id: show_ports
-        run: netstat -plnt
+        run: netstat -tulpn
 
       - name: Display current directory
         id: ls_path
