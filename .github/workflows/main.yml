@@ -17,6 +17,8 @@
 # https://ryaneschinger.com/blog/using-docker-native-health-checks/
 # https://github.com/laradock/laradock/blob/master/docker-compose.yml
 # https://testdriven.io/blog/deploying-django-to-digitalocean-with-docker-and-github-actions/
+# https://github.com/peter-evans/docker-compose-healthcheck
+# https://ryaneschinger.com/blog/using-docker-native-health-checks/
 
 on: [push]
 
@@ -33,12 +35,14 @@ jobs:
       - name: Display the path
         id: pwd_path
         run: pwd
-        shell: bash
-    
+
+      - name: Show processes and ports
+        id: show_ports
+        run: netstat -plnt
+
       - name: Display current directory
         id: ls_path
         run: ls -la
-        shell: bash
 
       - name: Create mods dir
         id: mkdir_data
@@ -51,7 +55,6 @@ jobs:
       - name: Display the mod directory
         id: ls_mod_dir
         run: ls -la $GITHUB_WORKSPACE/mods
-        shell: bash
 
       - name: Start container 
         id: start_container
@@ -63,11 +66,11 @@ jobs:
 
       - name: Get Minecraft container health
         id: mc_container_health
-        run: /usr/bin/docker container inspect -f "{{.State.Health.Status}}" minecraftserver
+        run: docker container inspect -f "{{.State.Health.Status}}" minecraftserver
 
       - name: Display Minecraft container logs
         id: mc_container_logs
-        run: /usr/bin/docker logs minecraftserver
+        run: docker logs minecraftserver
 
   test_mod:
     name: Test mod in server 
