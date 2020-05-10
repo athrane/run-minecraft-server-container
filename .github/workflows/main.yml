@@ -52,10 +52,6 @@ jobs:
         id: ls_path
         run: ls -la
 
-      - name: Display current directory
-        id: ls_path
-        run: ls -la
-
       - name: Build Docker image
         run: docker build . --file Dockerfile --tag athrane/minecraft:1 --tag athrane/minecraft:latest
 
