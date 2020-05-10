@@ -28,6 +28,11 @@
 # https://docs.docker.com/compose/startup-order/
 # https://hub.docker.com/r/itzg/minecraft-server/dockerfile/
 
+# https://www.edwardthomson.com/blog/github_actions_9_deploy_to_github_packages.html
+# https://dev.to/kenessajr/deploy-a-react-app-to-digitalocean-using-github-actions-and-docker-4pln
+# https://github.community/t5/GitHub-Actions/Cache-a-Docker-image-built-in-workflow/td-p/31805
+# https://github.com/marketplace/actions/build-docker-images-using-caches
+
 on: [push]
 
 jobs:
@@ -37,23 +42,28 @@ jobs:
     steps:
     
       - name: Checkout
-        id: checkout_source
         uses: actions/checkout@v2
 
       - name: Display the path
-        id: pwd_path
         run: pwd
 
       - name: Show processes and ports
-        id: show_ports
         run: netstat -tulpn
 
       - name: Display current directory
-        id: ls_path
         run: ls -la
 
-      - name: Build Docker image
-        run: docker build . --file Dockerfile --tag athrane/minecraft:1 --tag athrane/minecraft:latest
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build image
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/minecraft:${{ github.sha }} --tag ${{ secrets.DOCKER_USER }}/minecraft:latest
+
+      - name: Push image
+        run: docker push ${{ secrets.DOCKER_USER }}/minecraft:${{ github.sha }}
+
+      - name: Push image
+        run: docker push ${{ secrets.DOCKER_USER }}/minecraft::latest
 
   test_mod:
     name: Test mod in server 
@@ -62,22 +72,15 @@ jobs:
     timeout-minutes: 5
     services:
       mcserver:
-        image: athrane/minecraft:latest
+        image: ${{ secrets.DOCKER_USER }}/minecraft:latest
         ports:
           - 25565:25565
         options: --name minecraftserver
 
     steps:    
       - name: Get Minecraft container health
-        id: mc_container_health
         run: /usr/bin/docker container inspect -f "{{.State.Health.Status}}" minecraftserver
 
       - name: Display Minecraft container logs
-        id: mc_container_logs
         run: /usr/bin/docker logs minecraftserver
-
-      - name: Display the mod directory
-        id: ls_mod_dir
-        run: ls -la $GITHUB_WORKSPACE/mods
-        shell: bash
 
