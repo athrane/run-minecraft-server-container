@@ -1,5 +1,6 @@
 FROM itzg/minecraft-server
 
+ENV NAME=mc
 ENV EULA=TRUE
 ENV VERSION=1.15.2
 ENV TYPE=FORGE
