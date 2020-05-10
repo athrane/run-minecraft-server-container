@@ -56,7 +56,7 @@ jobs:
         run: docker build . --file Dockerfile --tag athrane/minecraft:1 --tag athrane/minecraft:latest
 
       - name: Start container 
-        run: docker run athrane/minecraft:latest --name minecraftserver
+        run: docker run athrane/minecraft:latest
 
       - name: List containers 
         id: list_containers
