@@ -19,7 +19,7 @@
 # https://testdriven.io/blog/deploying-django-to-digitalocean-with-docker-and-github-actions/
 # https://github.com/peter-evans/docker-compose-healthcheck
 # https://ryaneschinger.com/blog/using-docker-native-health-checks/
-https://www.datanovia.com/en/courses/docker-compose-wait-for-dependencies/
+# https://www.datanovia.com/en/courses/docker-compose-wait-for-dependencies/
 
 # https://project-awesome.org/sdras/awesome-actions#collection-of-actions
 # https://github.com/jakejarvis/wait-action
