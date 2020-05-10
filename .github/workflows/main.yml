@@ -72,7 +72,7 @@ jobs:
     timeout-minutes: 5
     services:
       mcserver:
-        image: thrane/minecraft:latest
+        image: bassebombecraft/minecraft:latest
         ports:
           - 25565:25565
         options: --name minecraftserver
