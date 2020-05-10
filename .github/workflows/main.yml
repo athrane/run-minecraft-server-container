@@ -54,16 +54,16 @@ jobs:
         run: ls -la
 
       - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u thrane -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build image
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/minecraft:${{ github.sha }} --tag ${{ secrets.DOCKER_USER }}/minecraft:latest
+        run: docker build . --file Dockerfile --tag bassebombecraft/minecraft:${{ github.sha }} --tag bassebombecraft/minecraft:latest
 
       - name: Push image
-        run: docker push ${{ secrets.DOCKER_USER }}/minecraft:${{ github.sha }}
+        run: docker push bassebombecraft/minecraft:${{ github.sha }}
 
       - name: Push image
-        run: docker push ${{ secrets.DOCKER_USER }}/minecraft::latest
+        run: docker push bassebombecraft/minecraft::latest
 
   test_mod:
     name: Test mod in server 
@@ -72,7 +72,7 @@ jobs:
     timeout-minutes: 5
     services:
       mcserver:
-        image: ${{ secrets.DOCKER_USER }}/minecraft:latest
+        image: thrane/minecraft:latest
         ports:
           - 25565:25565
         options: --name minecraftserver
