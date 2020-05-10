@@ -52,21 +52,15 @@ jobs:
         id: ls_path
         run: ls -la
 
-      - name: Create mods dir
-        id: mkdir_data
-        run: mkdir $GITHUB_WORKSPACE/mods
+      - name: Display current directory
+        id: ls_path
+        run: ls -la
 
-      - name: Download mod
-        id: download_mod
-        run: wget -P $GITHUB_WORKSPACE/mods https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
-
-      - name: Display the mod directory
-        id: ls_mod_dir
-        run: ls -la $GITHUB_WORKSPACE/mods
+      - name: Build Docker image
+        run: docker build . --file Dockerfile --tag athrane/minecraft:1 --tag athrane/minecraft:latest
 
       - name: Start container 
-        id: start_container
-        run: docker-compose up -d
+        run: docker run athrane/minecraft:latest --name minecraftserver
 
       - name: List containers 
         id: list_containers
@@ -87,18 +81,10 @@ jobs:
     timeout-minutes: 5
     services:
       mcserver:
-        image: itzg/minecraft-server:multiarch      
-        env:
-          NAME: mc
-          EULA: TRUE
-          VERSION: 1.15.2
-          TYPE: FORGE
-          FORGEVERSION: 31.1.10
+        image: athrane/minecraft:latest
         ports:
           - 25565:25565
-        volumes:
-           - mods:/mods
-        options: --name minecraftserver --entrypoint ["/bin/sh", "wget", "-P", "$GITHUB_WORKSPACE/mods", "https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar"] 
+        options: --name minecraftserver
 
     steps:    
       - name: Get Minecraft container health
