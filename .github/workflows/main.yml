@@ -19,6 +19,14 @@
 # https://testdriven.io/blog/deploying-django-to-digitalocean-with-docker-and-github-actions/
 # https://github.com/peter-evans/docker-compose-healthcheck
 # https://ryaneschinger.com/blog/using-docker-native-health-checks/
+https://www.datanovia.com/en/courses/docker-compose-wait-for-dependencies/
+
+# https://project-awesome.org/sdras/awesome-actions#collection-of-actions
+# https://github.com/jakejarvis/wait-action
+# https://github.com/Eficode/wait-for
+# https://github.com/vishnubob/wait-for-it
+# https://docs.docker.com/compose/startup-order/
+# https://hub.docker.com/r/itzg/minecraft-server/dockerfile/
 
 on: [push]
 
@@ -90,7 +98,7 @@ jobs:
           - 25565:25565
         volumes:
            - mods:/mods
-        options: --name minecraftserver
+        options: --name minecraftserver --entrypoint /bin/bash wget -P $GITHUB_WORKSPACE/mods https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
 
     steps:    
       - name: Get Minecraft container health
