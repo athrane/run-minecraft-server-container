@@ -98,7 +98,7 @@ jobs:
           - 25565:25565
         volumes:
            - mods:/mods
-        options: --name minecraftserver --entrypoint ["wget", "-P", "$GITHUB_WORKSPACE/mods", "https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar"] 
+        options: --name minecraftserver --entrypoint ["/bin/sh", "wget", "-P", "$GITHUB_WORKSPACE/mods", "https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar"] 
 
     steps:    
       - name: Get Minecraft container health
