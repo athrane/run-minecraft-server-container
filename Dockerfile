@@ -2,9 +2,8 @@ FROM itzg/minecraft-server
 ENV mc
 ENV EULA=TRUE
 ENV VERSION=1.15.2
-ENV TYPE FORGE
-ENV FORGEVERSION: 31.1.10
-ENV "JVM_OPTS=-Xmx3072M -Xms1024M"
+ENV TYPE=FORGE
+ENV FORGEVERSION=31.1.10
 
 RUN mkdir -m 777 /data/mods \
   && chown minecraft:minecraft /data/mods \
