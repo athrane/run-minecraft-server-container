@@ -63,7 +63,7 @@ jobs:
         run: docker push bassebombecraft/minecraft:${{ github.sha }}
 
       - name: Push image
-        run: docker push bassebombecraft/minecraft::latest
+        run: docker push bassebombecraft/minecraft:latest
 
   test_mod:
     name: Test mod in server 
