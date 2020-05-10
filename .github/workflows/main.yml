@@ -55,21 +55,6 @@ jobs:
       - name: Build Docker image
         run: docker build . --file Dockerfile --tag athrane/minecraft:1 --tag athrane/minecraft:latest
 
-      - name: Start container 
-        run: docker run athrane/minecraft:latest
-
-      - name: List containers 
-        id: list_containers
-        run: docker ps -a
-
-      - name: Get Minecraft container health
-        id: mc_container_health
-        run: docker container inspect -f "{{.State.Health.Status}}" minecraftserver
-
-      - name: Display Minecraft container logs
-        id: mc_container_logs
-        run: docker logs minecraftserver
-
   test_mod:
     name: Test mod in server 
     needs: download_mod
