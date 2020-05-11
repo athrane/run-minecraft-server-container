@@ -1,10 +1,11 @@
 FROM itzg/minecraft-server
 
 ARG MOD_JAR
+ARG MOD_URL
  
 RUN mkdir -m 777 /data/mods \
   && chown minecraft:minecraft /data/mods \
-  && wget -P /data/mods https://github.com/athrane/bassebombecraft/releases/download/1.42.1/$MOD_JAR \
+  && wget -P /data/mods $MOD_URL \
   && chmod 777 /data/mods/$MOD_JAR \
   && chown minecraft:minecraft /data/mods/$MOD_JAR
   

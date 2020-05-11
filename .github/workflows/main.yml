@@ -48,16 +48,17 @@ jobs:
       DOCKER_USER: thrane
       DOCKER_BUILDKIT: 1
       MOD_JAR: BasseBombeCraft-1.15.2-1.42-server.jar 
+      MOD_URL: https://github.com/athrane/bassebombecraft/releases/download/1.42.1/
 
     steps:    
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Docker login
+      - name: DockerHub login
         run: docker login -u $DOCKER_USER -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build image
-        run: docker build . --build-arg MOD_JAR=$MOD_JAR --file Dockerfile --tag bassebombecraft/minecraft:${{ github.sha }} --tag bassebombecraft/minecraft:latest
+        run: docker build . --build-arg MOD_JAR=$MOD_JAR --build-arg MOD_URL=$MOD_URL --file Dockerfile --tag bassebombecraft/minecraft:${{ github.sha }} --tag bassebombecraft/minecraft:latest
 
       - name: Push image
         run: docker push bassebombecraft/minecraft:${{ github.sha }}
