@@ -1,19 +1,9 @@
 FROM itzg/minecraft-server
 
-ENV NAME=mc
-ENV EULA=TRUE
-ENV VERSION=1.15.2
-ENV TYPE=FORGE
-ENV FORGEVERSION=31.1.10
-
-COPY log4j2.xml /tmp/log4j2.xml
-
-
 RUN ls -la /
-RUN ls -la /data
 
-RUN mkdir -m 777 /data/mods
-RUN ls -la /data
+RUN mkdir -p -m 777 /data1/mods1
+RUN ls -la /data1
 
 WORKDIR /data/mods
 RUN ls -la /data
@@ -35,4 +25,12 @@ RUN mkdir -m 777 /data/mods2 \
   && chown minecraft:minecraft /data/mods2 
   
 RUN ls -la /data
+
+ENV NAME=mc
+ENV EULA=TRUE
+ENV VERSION=1.15.2
+ENV TYPE=FORGE
+ENV FORGEVERSION=31.1.10
+
+COPY log4j2.xml /tmp/log4j2.xml
   
