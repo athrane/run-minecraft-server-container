@@ -5,7 +5,7 @@ ARG MOD_URL
  
 RUN mkdir -m 777 /data/mods \
   && chown minecraft:minecraft /data/mods \
-  && wget -P /data/mods $MOD_URL \
+  && wget -P /data/mods $MOD_URL/$MOD_JAR \
   && chmod 777 /data/mods/$MOD_JAR \
   && chown minecraft:minecraft /data/mods/$MOD_JAR
   
