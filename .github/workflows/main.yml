@@ -33,12 +33,19 @@
 # https://github.community/t5/GitHub-Actions/Cache-a-Docker-image-built-in-workflow/td-p/31805
 # https://github.com/marketplace/actions/build-docker-images-using-caches
 
+# Building with buildkit to avoid issues 3639
+# https://github.com/moby/moby/issues/3639
+# https://qiita.com/homines22/items/6d28461d97906e42f57c
+# https://github.com/docker/github-actions/blob/826b584752ffa6abc1a2d94da26f348e3e4f73d0/.github/workflows/main.yml#L27
+
 on: [push]
 
 jobs:
   create_container:
     name: Create container with mod
     runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: 1    
     steps:
     
       - name: Checkout
