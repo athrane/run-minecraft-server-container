@@ -36,8 +36,8 @@
 on: [push]
 
 jobs:
-  download_mod:
-    name: Download mod
+  create_container:
+    name: Create container with mod
     runs-on: ubuntu-latest
     steps:
     
@@ -67,7 +67,7 @@ jobs:
 
   test_mod:
     name: Test mod in server 
-    needs: download_mod
+    needs: create_container
     runs-on: ubuntu-latest
     timeout-minutes: 5
     services:
