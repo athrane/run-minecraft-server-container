@@ -55,7 +55,7 @@ jobs:
         run: docker login -u thrane -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build image
-        run: docker build . --file Dockerfile --tag bassebombecraft/minecraft:${{ github.sha }} --tag bassebombecraft/minecraft:latest
+        run: docker build . --build-arg MOD_JAR=BasseBombeCraft-1.15.2-1.42-server.jar --file Dockerfile --tag bassebombecraft/minecraft:${{ github.sha }} --tag bassebombecraft/minecraft:latest
 
       - name: Push image
         run: docker push bassebombecraft/minecraft:${{ github.sha }}

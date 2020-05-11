@@ -1,10 +1,12 @@
 FROM itzg/minecraft-server
 
-RUN mkdir -m 777 /data/mods 
-RUN chown minecraft:minecraft /data/mods 
-RUN wget -P /data/mods -O bassebombecraft.jar https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar 
-RUN chmod 777 /data/mods/bassebombecraft.jar 
-RUN chown minecraft:minecraft /data/mods/bassebombecraft.jar
+ARG MOD_JAR
+ 
+RUN mkdir -m 777 /data/mods \
+  && chown minecraft:minecraft /data/mods \
+  && wget -P /data/mods https://github.com/athrane/bassebombecraft/releases/download/1.42.1/$MOD_JAR \
+  && chmod 777 /data/mods/$MOD_JAR \
+  && chown minecraft:minecraft /data/mods/$MOD_JAR
   
 ENV NAME=mc
 ENV EULA=TRUE
