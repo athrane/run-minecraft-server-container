@@ -6,7 +6,7 @@ RUN mkdir -p -m 777 /data1/mods1
 RUN ls -la /data1
 
 RUN ls -la /data
-RUN mkdir -p -m 777 /data/mods
+RUN mkdir -p /data/mods
 RUN ls -la /data
 
 RUN wget -P /data/mods https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
