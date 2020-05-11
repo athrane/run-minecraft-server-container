@@ -13,10 +13,9 @@ RUN ls -la /data
 WORKDIR /data/mods
 RUN chmod 777 /data/mods
 RUN ls -la /data
-RUN ls -la /data
 RUN wget -P /tmp https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
-RUN ls -la /tmp 
-RUN wget -P /data/mods https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
+RUN ls -la /tmp
+RUM cp /tmp/BasseBombeCraft-1.15.2-1.42-server.jar /data/mods
 RUN chown minecraft:minecraft /data/mods 
 RUN ls -la /data/mods 
 
