@@ -45,17 +45,19 @@ jobs:
     name: Create container with mod
     runs-on: ubuntu-latest
     env:
-      DOCKER_BUILDKIT: 1    
-    steps:
-    
+      DOCKER_USER: thrane
+      DOCKER_BUILDKIT: 1
+      MOD_JAR: BasseBombeCraft-1.15.2-1.42-server.jar 
+
+    steps:    
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Docker login
-        run: docker login -u thrane -p ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USER -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build image
-        run: docker build . --build-arg MOD_JAR=BasseBombeCraft-1.15.2-1.42-server.jar --file Dockerfile --tag bassebombecraft/minecraft:${{ github.sha }} --tag bassebombecraft/minecraft:latest
+        run: docker build . --build-arg MOD_JAR=$MOD_JAR --file Dockerfile --tag bassebombecraft/minecraft:${{ github.sha }} --tag bassebombecraft/minecraft:latest
 
       - name: Push image
         run: docker push bassebombecraft/minecraft:${{ github.sha }}
