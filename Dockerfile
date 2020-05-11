@@ -10,7 +10,7 @@ COPY log4j2.xml /tmp/log4j2.xml
 
 RUN ls -la /
 RUN ls -la /data
-RUN mkdir -m 777 /data/mods
+RUN mkdir -p -m 777 /data/mods
 RUN ls -la /data
 RUN chown minecraft:minecraft /data/mods 
 RUN ls -la /data/mods 
