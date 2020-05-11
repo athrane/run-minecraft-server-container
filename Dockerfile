@@ -1,7 +1,5 @@
 FROM itzg/minecraft-server
 
-ARG 
- 
 RUN mkdir -m 777 /data/mods \
   && chown minecraft:minecraft /data/mods \
   && wget -P /data/mods -O bassebombecraft.jar https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar \
