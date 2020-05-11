@@ -51,15 +51,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Display the path
-        run: pwd
-
-      - name: Show processes and ports
-        run: netstat -tulpn
-
-      - name: Display current directory
-        run: ls -la
-
       - name: Docker login
         run: docker login -u thrane -p ${{ secrets.DOCKER_PASSWORD }}
 
