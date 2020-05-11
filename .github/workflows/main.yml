@@ -49,6 +49,8 @@ jobs:
       DOCKER_BUILDKIT: 1
       MOD_JAR: BasseBombeCraft-1.15.2-1.42-server.jar 
       MOD_URL: https://github.com/athrane/bassebombecraft/releases/download/1.42.1/
+      MC_VERSION: 1.15.2
+      FORGE_VERSION: 31.1.10
 
     steps:    
       - name: Checkout

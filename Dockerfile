@@ -2,6 +2,8 @@ FROM itzg/minecraft-server
 
 ARG MOD_JAR
 ARG MOD_URL
+ARG MC_VERSION
+ARG FORGE_VERSION
  
 RUN mkdir -m 777 /data/mods \
   && chown minecraft:minecraft /data/mods \
@@ -11,9 +13,9 @@ RUN mkdir -m 777 /data/mods \
   
 ENV NAME=mc
 ENV EULA=TRUE
-ENV VERSION=1.15.2
+ENV VERSION=$MC_VERSION
 ENV TYPE=FORGE
-ENV FORGEVERSION=31.1.10
+ENV FORGEVERSION=$FORGE_VERSION
 
 COPY log4j2.xml /tmp/log4j2.xml
   
