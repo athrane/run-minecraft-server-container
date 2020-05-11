@@ -6,7 +6,7 @@ RUN mkdir -p -m 777 /data1/mods1
 RUN ls -la /data1
 
 USER minecraft:minecraft 
-WORKDIR /data/mods
+RUN mkdir -p -m 777 /data/mods
 RUN ls -la /data
 RUN ls -la /data/mods 
 
