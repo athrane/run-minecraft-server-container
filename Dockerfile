@@ -5,27 +5,14 @@ RUN ls -la /
 RUN mkdir -p -m 777 /data1/mods1
 RUN ls -la /data1
 
+USER minecraft:minecraft 
 WORKDIR /data/mods
 RUN ls -la /data
-RUN wget -P /tmp https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
-RUN ls -la /tmp
-
 RUN ls -la /data/mods 
-RUN cp /tmp/BasseBombeCraft-1.15.2-1.42-server.jar /data/mods
+
+RUN wget -P /data/mods https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar
 RUN ls -la /data/mods 
  
-RUN chmod 777 /data/mods
-RUN ls -la /data
-
-RUN chown minecraft:minecraft /data/mods 
-RUN ls -la /data
-
-RUN mkdir -m 777 /data/mods2 \
-  && wget -P /data/mods2 https://github.com/athrane/bassebombecraft/releases/download/1.42.1/BasseBombeCraft-1.15.2-1.42-server.jar \
-  && chown minecraft:minecraft /data/mods2 
-  
-RUN ls -la /data
-
 ENV NAME=mc
 ENV EULA=TRUE
 ENV VERSION=1.15.2
