@@ -16,7 +16,7 @@ RUN wget -P /tmp https://github.com/athrane/bassebombecraft/releases/download/1.
 RUN ls -la /tmp
 
 RUN ls -la /data/mods 
-RUM /tmp/BasseBombeCraft-1.15.2-1.42-server.jar /data/mods
+RUN cp /tmp/BasseBombeCraft-1.15.2-1.42-server.jar /data/mods
 RUN ls -la /data/mods 
  
 RUN chmod 777 /data/mods
